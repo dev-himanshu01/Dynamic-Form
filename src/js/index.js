@@ -44,10 +44,25 @@ emailFld.addEventListener('keyup', function (evt) {
     validateFld(this, evt.target.reportValidity());
   });
 
-
-
-
-
-
-
+  formEl.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    const getFormValues = [...evt.target.elements]
+      .filter((el) => el.type !== 'submit' && el)
+      .map((el) => {
+        return {
+          name: el.getAttribute('name'),
+          type: el.type,
+          value: el.type === 'checkbox' ? el.checked : el.value,
+        };
+      });
   
+    const isFilled = getFormValues
+      .filter((el) => el.type !== 'checkbox')
+      .every((el) => el.value !== '');
+    return isFilled && canSubmit && submitForm(getFormValues);
+  });
+
+
+
+
+
