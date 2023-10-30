@@ -22,3 +22,32 @@ const validateFld = (el, condition) => {
     el.parentElement.classList.add('form-field-error');
   }
 };
+
+emailFld.addEventListener('keyup', function (evt) {
+    evt.preventDefault();
+    validateFld(this, evt.target.reportValidity());
+  });
+  
+  passwordFld.addEventListener('keyup', function (evt) {
+    evt.preventDefault();
+    validateFld(this, passwordRegEx.test(evt.target.value));
+  });
+  
+  repasswordFld.addEventListener('keyup', function (evt) {
+    evt.preventDefault();
+    validateFld(this, passwordFld.value === evt.target.value);
+  });
+  
+  fullnameFld.addEventListener('keyup', function (evt) {
+    evt.preventDefault();
+    evt.target.value = evt.target.value.trimLeft();
+    validateFld(this, evt.target.reportValidity());
+  });
+
+
+
+
+
+
+
+  
